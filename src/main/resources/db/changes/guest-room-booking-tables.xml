@@ -1,0 +1,83 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<changeSet id="21-09-2022-create-table-guest" author="ambaryan">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="guest"/>
+			</not>
+		</preConditions>
+		<createTable tableName="guest">
+			<column autoIncrement="true" name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" unique="true"/>
+			</column>
+			<column name="first_name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="last_name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="middle_name" type="varchar(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="birthday_date" type="date">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="22-09-2022-create-table-hotel_room" author="ambaryan">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="hotel_room"/>
+			</not>
+		</preConditions>
+		<createTable tableName="hotel_room">
+			<column autoIncrement="true" name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" unique="true"/>
+			</column>
+			<column name="bedroom_count" type="integer">
+				<constraints nullable="false"/>
+			</column>
+			<column name="room_number" type="integer">
+				<constraints nullable="false"/>
+			</column>
+			<column name="category" type="varchar(20)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="cleaning_time" type="datetime">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="22-09-2022-create-table-booking" author="ambaryan">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="booking"/>
+			</not>
+		</preConditions>
+		<createTable tableName="booking">
+			<column autoIncrement="true" name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" unique="true"/>
+			</column>
+			<column name="check_in_date" type="date">
+				<constraints nullable="false"/>
+			</column>
+			<column name="check_out_date" type="date">
+				<constraints nullable="false"/>
+			</column>
+			<column name="guest_id" type="bigint">
+				<constraints nullable="false" foreignKeyName="booking_guest_id_fk" referencedTableName="guest"
+				             referencedColumnNames="id"/>
+			</column>
+			<column name="hotel_room_id" type="bigint">
+				<constraints nullable="false" foreignKeyName="booking_hotel_room_id_fk" referencedTableName="hotel_room"
+				             referencedColumnNames="id"/>
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

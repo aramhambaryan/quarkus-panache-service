@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+	<changeSet id="22-09-2022-create-table-hotel_room" author="ambaryan">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="hotel_room"/>
+		</preConditions>
+		<sql>
+			INSERT INTO  hotel_room(room_number, bedroom_count, category)
+			VALUES
+				(1, 2, 'LUX'),
+				(2, 3, 'COMFORT'),
+				(3, 1, 'ECONOMY'),
+				(4, 3, 'LUX'),
+				(5, 2, 'COMFORT'),
+				(6, 1, 'ECONOMY'),
+				(7, 4, 'LUX'),
+				(8, 2, 'ECONOMY'),
+				(9, 3, 'COMFORT'),
+				(10, 2, 'ECONOMY');
+		</sql>
+	</changeSet>
+</databaseChangeLog>
